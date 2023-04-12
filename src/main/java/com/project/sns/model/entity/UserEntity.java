@@ -25,7 +25,7 @@ public class UserEntity {
     @Column(name = "user_name")
     private String userName;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
     @Column(name = "role")
@@ -40,8 +40,6 @@ public class UserEntity {
 
     @Column(name = "deleted_at")
     private Timestamp deletedAt;
-
-    public UserEntity() {};
 
     @PrePersist
     void registeredAt() {
