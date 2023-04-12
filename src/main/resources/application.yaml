@@ -18,3 +18,8 @@ spring:
       password: 1234
       driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/sns
+
+jwt:
+  secret-key: sns-application-project-2023.secret_key
+  # 30일
+  token.expired-time-ms: 2592000000
