@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -41,6 +40,8 @@ public class UserEntity {
 
     @Column(name = "deleted_at")
     private Timestamp deletedAt;
+
+    public UserEntity() {};
 
     @PrePersist
     void registeredAt() {
