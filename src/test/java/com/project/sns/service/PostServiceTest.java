@@ -35,13 +35,13 @@ public class PostServiceTest {
     void 포스트작성이_성공한경우() {
         String title = "title";
         String body = "body";
-        String userName = "userName";
+        String userName = "test03";
 
         //mocking
         when(userEntityRepository.findByUserName(userName)).thenReturn(Optional.of(mock(UserEntity.class)));
         when(postEntityRepository.save(any())).thenReturn(mock(PostEntity.class));
 
-        Assertions.assertDoesNotThrow(() ->postService.create(title, body, userName));
+        Assertions.assertDoesNotThrow(() -> postService.create(title, body, userName));
     }
 
     @Test
