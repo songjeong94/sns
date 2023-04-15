@@ -132,7 +132,7 @@ public class PostServiceTest {
 
     @Test
     void 포스트삭제시_포스트가_존재하지않는_경우() {
-        String userName = "userName";
+        String userName = "test03";
         Integer postId = 1;
 
         PostEntity postEntity = PostEntityFixture.get(userName, postId, 1);
@@ -147,7 +147,7 @@ public class PostServiceTest {
 
     @Test
     void 포스트삭제_권한이없는_경우() {
-        String userName = "useName";
+        String userName = "test03";
         Integer postId = 1;
 
         PostEntity postEntity = PostEntityFixture.get(userName, postId, 1);
@@ -170,7 +170,10 @@ public class PostServiceTest {
     @Test
     void 내피드목록요청이_성공한경우() {
         Pageable pageable = mock(Pageable.class);
+        UserEntity user = mock(UserEntity.class);
+        when(userEntityRepository.findByUserName(any())).thenReturn(Optional.of(user));
         when(postEntityRepository.findAllByUser(any(), pageable)).thenReturn(Page.empty());
         Assertions.assertDoesNotThrow(() -> postService.my("", pageable));
     }
+
 }
