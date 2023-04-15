@@ -14,7 +14,7 @@ import java.time.Instant;
 @Setter
 @Entity
 @Table(name = "\"user\"") // user를 감싸준 이유는 postgresql을 사용하게 되면 user권한에 대한 테이블이 이미 존재해서 중복된다
-@SQLDelete(sql = "UPDATED \"user\" SET deleted_at = NOW() Where id=?")
+@SQLDelete(sql = "UPDATE \"user\" SET deleted_at = NOW() Where id=?")
 @Where(clause = "deleted_at is NULL") // select문을 날릴때 deleted된 데이터는 조회하지 않는다.
 public class UserEntity {
 

@@ -64,8 +64,8 @@ public class PostServiceTest {
     void 포스트수정이_성공한경우() {
         String title = "title";
         String body = "body";
-        String userName = "test03";
-        Integer postId = 1;
+        String userName = "test4";
+        Integer postId = 2;
 
         PostEntity postEntity = PostEntityFixture.get(userName, postId, 1);
         UserEntity userEntity = postEntity.getUser();
@@ -82,8 +82,8 @@ public class PostServiceTest {
     void 포스트수정이_포스트가_존재하지않는_경우() {
         String title = "title";
         String body = "body";
-        String userName = "test03";
-        Integer postId = 1;
+        String userName = "test4";
+        Integer postId = 2;
 
         PostEntity postEntity = PostEntityFixture.get(userName, postId, 1);
         UserEntity userEntity = postEntity.getUser();
@@ -99,7 +99,7 @@ public class PostServiceTest {
     void 포스트수정이_권한이없는_경우() {
         String title = "title";
         String body = "body";
-        String userName = "test03";
+        String userName = "test4";
         Integer postId = 1;
 
         PostEntity postEntity = PostEntityFixture.get(userName, postId, 1);
