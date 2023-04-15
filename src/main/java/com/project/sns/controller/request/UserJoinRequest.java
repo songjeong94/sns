@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class UserJoinRequest {
 
-    private String name;
+    private String userName;
     private String password;
 
 }
