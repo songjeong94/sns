@@ -217,6 +217,7 @@ public class PostControllerTest {
     @Test
     @WithAnonymousUser //로그인이 되어있다는 가정
     void 내피드목록요청시_로그인하지_않은경우() throws Exception{
+
         when(postService.my(any(), any())).thenReturn(Page.empty());
 
         mockMvc.perform(get("/api/v1/posts/my")
@@ -224,4 +225,5 @@ public class PostControllerTest {
                 ).andDo(print())
                 .andExpect(status().isUnauthorized());
     }
+
 }
