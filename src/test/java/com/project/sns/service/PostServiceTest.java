@@ -14,6 +14,8 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
@@ -130,7 +132,7 @@ public class PostServiceTest {
 
     @Test
     void 포스트삭제시_포스트가_존재하지않는_경우() {
-        String userName = "test03";
+        String userName = "userName";
         Integer postId = 1;
 
         PostEntity postEntity = PostEntityFixture.get(userName, postId, 1);
@@ -145,7 +147,7 @@ public class PostServiceTest {
 
     @Test
     void 포스트삭제_권한이없는_경우() {
-        String userName = "test03";
+        String userName = "useName";
         Integer postId = 1;
 
         PostEntity postEntity = PostEntityFixture.get(userName, postId, 1);
@@ -158,4 +160,17 @@ public class PostServiceTest {
         Assertions.assertEquals(ErrorCode.INVALID_PERMISSION, e.getErrorCode());
     }
 
+    @Test
+    void 피드목록요청이_성공한경우() {
+        Pageable pageable = mock(Pageable.class);
+        when(postEntityRepository.findAll(pageable)).thenReturn(Page.empty());
+        Assertions.assertDoesNotThrow(() -> postService.list(pageable));
+    }
+
+    @Test
+    void 내피드목록요청이_성공한경우() {
+        Pageable pageable = mock(Pageable.class);
+        when(postEntityRepository.findAllByUser(any(), pageable)).thenReturn(Page.empty());
+        Assertions.assertDoesNotThrow(() -> postService.my("", pageable));
+    }
 }
