@@ -3,7 +3,6 @@ package com.project.sns.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.sns.controller.request.PostCreateRequest;
 import com.project.sns.controller.request.PostModifyRequest;
-import com.project.sns.controller.request.UserJoinRequest;
 import com.project.sns.exception.ErrorCode;
 import com.project.sns.exception.SnsApplicationException;
 import com.project.sns.fixture.PostEntityFixture;
@@ -19,7 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -33,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class PostControllerTest {
 
-    @Autowired
     private MockMvc mockMvc;
 
     @Autowired
@@ -224,6 +221,35 @@ public class PostControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                 ).andDo(print())
                 .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser //로그인이 되어있다는 가정
+    void 좋아요기능() throws Exception{
+        mockMvc.perform(post("/api/v1/posts/1/likes")
+                        .contentType(MediaType.APPLICATION_JSON)
+                ).andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithAnonymousUser //로그인이 되어있다는 가정
+    void 좋아요버튼클리시_로그인하지_않은경우() throws Exception{
+        mockMvc.perform(post("/api/v1/posts/1/likes")
+                        .contentType(MediaType.APPLICATION_JSON)
+                ).andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithAnonymousUser //로그인이 되어있다는 가정
+    void 좋아요버튼클리시_게시글이_없는_경우() throws Exception{
+        doThrow(new SnsApplicationException(ErrorCode.POST_NOT_FOUNT)).when(postService).like(any(), any());
+
+        mockMvc.perform(post("/api/v1/posts/1/likes")
+                        .contentType(MediaType.APPLICATION_JSON)
+                ).andDo(print())
+                .andExpect(status().isNotFound());
     }
 
 }
