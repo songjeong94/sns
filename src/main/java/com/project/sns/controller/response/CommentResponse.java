@@ -3,12 +3,13 @@ package com.project.sns.controller.response;
 import com.project.sns.model.Comment;
 import com.project.sns.model.Post;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 
 import java.sql.Timestamp;
 
 @AllArgsConstructor
-@Getter
+@Data
 public class CommentResponse {
 
     private Integer id;
