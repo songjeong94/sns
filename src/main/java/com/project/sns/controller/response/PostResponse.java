@@ -3,12 +3,13 @@ package com.project.sns.controller.response;
 import com.project.sns.model.Post;
 import com.project.sns.model.User;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 
 import java.sql.Timestamp;
 
 @AllArgsConstructor
-@Getter
+@Data
 public class PostResponse {
 
     private Integer id;
