@@ -19,6 +19,10 @@ spring:
       driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/sns
 
+  redis:
+    port: 6379
+    host: localhost
+
 jwt:
   secret-key: sns-application-project-2023.secret_key
   # 30일
